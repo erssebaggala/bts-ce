@@ -71,8 +71,6 @@ services:
         depends_on:
             - bts-msgbroker
             - bts-api
-        volumes:
-          - ./timezone:/etc/timezone:ro
     bts-mediation:
 #        image: registry.gitlab.com/bts-ce/bts-ce-mediation:2.1.0
         image: bodastage/bts-ce-mediation:2.1.0
@@ -116,6 +114,7 @@ services:
 #          - "6380:6380"
 #        network_mode: "bridge"
 #        container_name: "bts-ce-cache"
+#        volumes:
 #    bts-ftp:
 #        image: stilliard/pure-ftpd:hardened
 #        restart: always
@@ -157,3 +156,4 @@ services:
         links:
           - "bts-msgbroker:msgbroker"
           - "bts-database:database"
+#        command: bash -c "ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone"
